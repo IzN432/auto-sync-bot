@@ -25,7 +25,7 @@ jobs:
       - name: Sync with upstream
         working-directory: repo
         run: |
-          git remote add upstream https://github.com/${{ matrix.repo_ord }}/${{ matrix.repo_name }}.git
+          git remote add upstream https://github.com/${{ matrix.repo_org }}/${{ matrix.repo_name }}.git
           git fetch upstream
           git checkout main
           git merge upstream/main --no-edit

@@ -7,25 +7,26 @@ on:
 
 env:
   GITHUB_USERNAME: Izn432
-  GITHUB_ORG: CATcher-org
-  REPO_NAME: WATcher
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        repo_org: ["CATcher-org", "CATcher-org"]
+        repo_name: ["WATcher", "CATcher"]
     steps:
       - uses: actions/checkout@v4
 
       - name: Clone the fork
         run: |
-          git clone https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ env.REPO_NAME }}.git repo
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo_name }}.git repo
           
       - name: Sync with upstream
         working-directory: repo
         run: |
-          git remote add upstream https://github.com/${{ env.GITHUB_ORG }}/${{ env.REPO_NAME }}.git
+          git remote add upstream https://github.com/${{ matrix.repo_ord }}/${{ matrix.repo_name }}.git
           git fetch upstream
           git checkout main
           git merge upstream/main --no-edit
-          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ env.REPO_NAME }}.git main
+          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo_name }}.git main

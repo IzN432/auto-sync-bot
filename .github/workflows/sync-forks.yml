@@ -30,4 +30,4 @@ jobs:
           git fetch upstream
           git checkout ${{ matrix.repo.branch }}
           git merge upstream/${{ matrix.repo.branch }} --no-edit
-          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo.name }}.git main
+          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo.name }}.git ${{ matrix.repo.branch }}

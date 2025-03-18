@@ -13,20 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        repo_org: ["CATcher-org", "CATcher-org"]
-        repo_name: ["WATcher", "CATcher"]
+        repo:
+          - { name: "WATcher", org: "CATcher-org" }
+          - { name: "CATcher", org: "CATcher-org" }
     steps:
       - uses: actions/checkout@v4
 
       - name: Clone the fork
         run: |
-          git clone https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo_name }}.git repo
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo.name }}.git repo
           
       - name: Sync with upstream
         working-directory: repo
         run: |
-          git remote add upstream https://github.com/${{ matrix.repo_org }}/${{ matrix.repo_name }}.git
+          git remote add upstream https://github.com/${{ matrix.repo.org }}/${{ matrix.repo.name }}.git
           git fetch upstream
           git checkout main
           git merge upstream/main --no-edit
-          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo_name }}.git main
+          git push https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ matrix.repo.name }}.git main

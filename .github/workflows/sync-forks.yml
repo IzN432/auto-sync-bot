@@ -24,7 +24,7 @@ jobs:
       - name: Sync with upstream
         working-directory: repo
         run: |
-          git remote add upstream https://github.com/${{ enc.GITHUB_ORG }}/${{ env.REPO_NAME }}.git
+          git remote add upstream https://github.com/${{ env.GITHUB_ORG }}/${{ env.REPO_NAME }}.git
           git fetch upstream
           git checkout main
           git merge upstream/main --no-edit

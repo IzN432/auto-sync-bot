@@ -19,7 +19,7 @@ jobs:
 
       - name: Clone the fork
         run: |
-          git clone https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_ORG }}/${{ env.REPO_NAME }}.git repo
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/${{ env.GITHUB_USERNAME }}/${{ env.REPO_NAME }}.git repo
           
       - name: Sync with upstream
         working-directory: repo
